@@ -20,4 +20,8 @@ export interface SinglePodcastType {
   trackTimeMillis: number;
   episodeUrl: string;
   trackId: number;
+  artistName: string;
+  artworkUrl100: string;
+  collectionName: string;
+  description: string;
 }

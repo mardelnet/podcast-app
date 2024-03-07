@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchSinglePodcast } from '../utils/fetchData';
 import { SinglePodcastType } from '../types/types';
 import styles from './Podcast.module.scss';
@@ -11,23 +11,15 @@ interface PodcastParams extends Record<string, string | undefined> {
 }
 
 function Podcast() {
-  const location = useLocation();
-  
-  const state = location.state as { 
-    name: string,
-    author: string,
-    image: string,
-    description: string
-  };
-
   const { podcastId } = useParams<PodcastParams>();
 
-  const [podcast, setPodcast] = useState<SinglePodcastType[] | null>(null);
+  const [episodes, setPodcast] = useState<SinglePodcastType[] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetchSinglePodcast(podcastId as string);
+        console.log(response)
         setPodcast(response);
       } catch (error: any) {
         console.error('Error fetching data:', error.message);
@@ -59,11 +51,18 @@ function Podcast() {
   return (
     <div className={styles['podcast-container']}>
       <div className={styles['podcast']}>
-        <PodcastData props={state} />
+        {episodes && episodes[0] && (
+          <PodcastData props={{
+            name: episodes[0].collectionName,
+            image: episodes[0].artworkUrl100,
+            author: episodes[0].artistName,
+            description: episodes[0].artistName,
+          }} />
+        )}
       </div>
       <div className={styles['episodes']}>
         <div className={styles['episodes__quantity']}>
-          Episodes: {podcast?.length}
+          Episodes: {episodes?.length}
         </div>
         <div className={styles['episodes__list']}>
           <table>
@@ -75,7 +74,7 @@ function Podcast() {
               </tr>
             </thead>
             <tbody>
-            {podcast && podcast.map((item: SinglePodcastType, index) => (
+            {episodes && episodes.map((item: SinglePodcastType, index) => (
                 <tr key={item.trackId} style={{ backgroundColor: index % 2 === 0 ? '#f6f6f6' : '#ffffff' }}>
                   <td>
                     <Link 

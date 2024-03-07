@@ -1,0 +1,45 @@
+.podcast-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.podcast {
+  flex: 1;
+  width: 30%;
+}
+
+.episode {
+  flex: 2;
+  width: 70%;
+
+  h1 {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  audio {
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  &__data {
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 5px #ccc;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .podcast-container {
+    flex-direction: column;
+
+    .podcast {
+      width: 100%;
+    }
+  
+    .episode {
+      width: 100%;
+    }
+  }
+}
