@@ -13,6 +13,6 @@ export interface SinglePodcastType {
   trackName: string;
   releaseDate: string;
   trackTimeMillis: number;
-  trackViewUrl: string;
+  episodeUrl: string;
   trackId: number;
 }
