@@ -11,7 +11,7 @@ export interface PodcastType {
   kind: string;
   'im:name': { label: string };
   url: string;
-  description: string;
+  summary: { label: string };
 }
 
 export interface SinglePodcastType {

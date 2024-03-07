@@ -17,7 +17,7 @@ function PodcastData({ props }: { props: PodcastProps }) {
       </div>
       {props.description && (
         <p>
-          <span>Description:</span>
+          <strong>Description:</strong>
           {props.description}
         </p>
       )}

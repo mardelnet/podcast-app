@@ -30,7 +30,7 @@ function Home() {
                   name: podcast['im:name'].label,
                   author: podcast['im:artist'].label,
                   image: podcast['im:image'][2].label,
-                  description: podcast.description
+                  description: podcast.summary.label
                 }} 
                 to={`/podcast/${podcast.id.attributes['im:id']}`}>
                 <img 
