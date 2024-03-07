@@ -15,11 +15,11 @@ const fetchData = async (url: string) => {
 
 export const fetchTopPodcasts = async () => {
   try {
-    const response = await fetchData('https://rss.applemarketingtools.com/api/v2/us/podcasts/top/50/podcasts.json');
+    const response = await fetchData('https://itunes.apple.com/us/rss/toppodcasts/limit=10/genre=1310/json');
 
     if (response.status.http_code === 200) {
       const json = await JSON.parse(response.contents);
-      return json.feed.results
+      return json.feed.entry
     } else {
       throw new Error('Failed to fetch data');
     }

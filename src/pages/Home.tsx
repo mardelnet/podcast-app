@@ -19,6 +19,8 @@ function Home() {
     fetchData();
   }, []);
 
+  console.log(topPodcasts);
+
   return (
     <div className='main-container'>
       {topPodcasts && (
@@ -27,15 +29,18 @@ function Home() {
             <div className={styles['podcast-item']} key={index}>
               <Link 
                 state={{
-                  name: podcast.name,
-                  author: podcast.artistName,
-                  image: podcast.artworkUrl100,
+                  name: podcast['im:name'].label,
+                  author: podcast['im:artist'].label,
+                  image: podcast['im:image'][2].label,
                   description: podcast.description
                 }} 
-                to={`/podcast/${podcast.id}`}>
-                <img className={styles['podcast-item__image']} src={podcast.artworkUrl100} alt={podcast.name} />
-                <h3>{podcast.name}</h3>
-                <p>Author: {podcast.artistName}</p>
+                to={`/podcast/${podcast.id.attributes['im:id']}`}>
+                <img 
+                  className={styles['podcast-item__image']} 
+                  src={podcast['im:image'][2].label} 
+                  alt={podcast['im:name'].label} />
+                <h3>{podcast['im:name'].label}</h3>
+                <p>Author: {podcast['im:artist'].label}</p>
               </Link>
             </div>
           ))}

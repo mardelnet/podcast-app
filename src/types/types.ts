@@ -1,11 +1,15 @@
+interface PodcastImage {
+  label: string;
+}
+
 export interface PodcastType {
-  artistName: string;
-  artworkUrl100: string;
+  'im:artist': { label: string };
+  'im:image': PodcastImage[];
   contentAdvisoryRating: string;
   genres: { name: string; id: string }[];
-  id: string;
+  id: { attributes: { 'im:id': string } };
   kind: string;
-  name: string;
+  'im:name': { label: string };
   url: string;
   description: string;
 }
