@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchTopPodcasts } from '../utils/fetchData';
 import { PodcastType } from '../types/types';
 import { Link } from 'react-router-dom';
-import styles from './Home.module.scss';
+import styles from './styles/Home.module.scss';
 import { useDispatch } from 'react-redux';
 import { isLoading } from '../utils/loadingSlice';
 import SearchInput from '../components/SearchInput'; // Import the SearchInput component

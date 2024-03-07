@@ -1,4 +1,4 @@
-import styles from './PodcastData.module.scss';
+import styles from './styles/PodcastData.module.scss';
 
 interface PodcastProps {
   image: string;

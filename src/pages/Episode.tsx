@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './Episode.module.scss';
+import styles from './styles/Episode.module.scss';
 import PodcastData from '../components/PodcastData';
 import { SinglePodcastType } from '../types/types';
 import { fetchSinglePodcast } from '../utils/fetchData';

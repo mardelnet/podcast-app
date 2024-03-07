@@ -1,4 +1,4 @@
-import styles from './Header.module.scss';
+import styles from './styles/Header.module.scss';
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 
