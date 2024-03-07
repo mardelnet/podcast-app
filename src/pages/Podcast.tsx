@@ -4,6 +4,8 @@ import { fetchSinglePodcast } from '../utils/fetchData';
 import { SinglePodcastType } from '../types/types';
 import styles from './Podcast.module.scss';
 import PodcastData from '../components/PodcastData';
+import { useDispatch } from 'react-redux'
+import { isLoading } from '../utils/loadingSlice'
 
 // Extend PodcastParams from Record<string, string | undefined>
 interface PodcastParams extends Record<string, string | undefined> {
@@ -12,22 +14,23 @@ interface PodcastParams extends Record<string, string | undefined> {
 
 function Podcast() {
   const { podcastId } = useParams<PodcastParams>();
+  const dispatch = useDispatch()
 
   const [episodes, setPodcast] = useState<SinglePodcastType[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    dispatch(isLoading(true));
     const fetchData = async () => {
       try {
         const response = await fetchSinglePodcast(podcastId as string);
         setPodcast(response);
-        setIsLoading(false);
+        dispatch(isLoading(false));
       } catch (error: any) {
         console.error('Error fetching data:', error.message);
       }
     };
     fetchData();
-  }, [podcastId]);
+  }, [dispatch, podcastId]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -48,15 +51,10 @@ function Podcast() {
 
     return `${formattedMinutes}:${formattedSeconds}`;
   }
-
-  if(isLoading) {
-    return (
-      <div>Loading...</div>
-    )
-  }
  
   return (
-    <div className={styles['podcast-container']}>
+    episodes && (
+      <div className={styles['podcast-container']}>
       <div className={styles['podcast']}>
         {episodes && episodes[0] && (
           <PodcastData props={{
@@ -99,6 +97,7 @@ function Podcast() {
         </div>
       </div>
     </div>
+    )
   );
 }
 
