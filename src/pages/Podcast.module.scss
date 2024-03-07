@@ -3,13 +3,9 @@
   flex-direction: row;
 }
 
-.podcast-item {
+.podcast {
   flex: 1;
   width: 30%;
-  padding: 20px;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 5px #ccc;
-  border-radius: 5px;
 }
 
 .episodes {
@@ -36,6 +32,7 @@
     table {
       text-align: left;
       border-collapse: collapse;
+      width: 100%;
   
       td {
         padding: 10px;
@@ -53,13 +50,13 @@
 @media (max-width: 600px) {
   .podcast-container {
     flex-direction: column;
-  }
 
-  .podcast-item {
-    width: 100%;
-  }
-
-  .episodes {
-    width: 100%;
+    .podcast {
+      width: 100%;
+    }
+  
+    .episodes {
+      width: 100%;
+    }
   }
 }

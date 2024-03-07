@@ -25,7 +25,14 @@ function Home() {
         <div className={styles['podcast-container']}>
           {topPodcasts.map((podcast, index) => (
             <div className={styles['podcast-item']} key={index}>
-              <Link to={`/podcast/${podcast.id}`}>
+              <Link 
+                state={{
+                  name: podcast.name,
+                  author: podcast.artistName,
+                  image: podcast.artworkUrl100,
+                  description: podcast.description
+                }} 
+                to={`/podcast/${podcast.id}`}>
                 <img className={styles['podcast-item__image']} src={podcast.artworkUrl100} alt={podcast.name} />
                 <h3>{podcast.name}</h3>
                 <p>Author: {podcast.artistName}</p>

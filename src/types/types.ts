@@ -7,6 +7,7 @@ export interface PodcastType {
   kind: string;
   name: string;
   url: string;
+  description: string;
 }
 
 export interface SinglePodcastType {
