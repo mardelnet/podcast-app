@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTopPodcasts } from '../utils/fetchData';
 import { PodcastType } from '../types/types';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [topPodcasts, setTopPodcasts] = useState<PodcastType[] | null>(null);
@@ -22,7 +23,7 @@ function Home() {
       <h2>Top Podcasts</h2>
       {topPodcasts && topPodcasts.map((podcast, index) => (
         <div key={index}>
-          <p><a href={`/podcast/${podcast.id}`}>{podcast.name}</a></p>
+          <Link to={`/podcast/${podcast.id}`}>{podcast.name}</Link>
         </div>
       ))}
     </div>
