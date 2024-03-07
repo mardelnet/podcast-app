@@ -36,6 +36,26 @@ function Podcast() {
     fetchData();
   }, [podcastId]);
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    return formattedDate;
+  }
+
+  const formatTime = ( milliseconds:number ) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+
+    // Calculate minutes and seconds
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    // Format minutes and seconds
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  }
+ 
   return (
     <div className={styles['podcast-container']}>
       <div className={styles['podcast']}>
@@ -64,8 +84,8 @@ function Podcast() {
                         {item.trackName}
                     </Link>
                   </td>
-                  <td>{item.releaseDate}</td>
-                  <td>{item.trackTimeMillis}</td>
+                  <td>{formatDate(item.releaseDate)}</td>
+                  <td>{formatTime(item.trackTimeMillis)}</td>
                 </tr>
               ))}
             </tbody>
