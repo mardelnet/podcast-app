@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchTopPodcasts } from '../utils/fetchData';
 import { PodcastType } from '../types/types';
 import { Link } from 'react-router-dom';
+import styles from './Home.module.scss';
 
 function Home() {
   const [topPodcasts, setTopPodcasts] = useState<PodcastType[] | null>(null);
@@ -19,13 +20,20 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h2>Top Podcasts</h2>
-      {topPodcasts && topPodcasts.map((podcast, index) => (
-        <div key={index}>
-          <Link to={`/podcast/${podcast.id}`}>{podcast.name}</Link>
+    <div className='main-container'>
+      {topPodcasts && (
+        <div className={styles['podcast-container']}>
+          {topPodcasts.map((podcast, index) => (
+            <div className={styles['podcast-item']} key={index}>
+              <Link to={`/podcast/${podcast.id}`}>
+                <img className={styles['podcast-item__image']} src={podcast.artworkUrl100} alt={podcast.name} />
+                <h3>{podcast.name}</h3>
+                <p>Author: {podcast.artistName}</p>
+              </Link>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }
