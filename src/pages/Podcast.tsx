@@ -14,13 +14,14 @@ function Podcast() {
   const { podcastId } = useParams<PodcastParams>();
 
   const [episodes, setPodcast] = useState<SinglePodcastType[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetchSinglePodcast(podcastId as string);
-        console.log(response)
         setPodcast(response);
+        setIsLoading(false);
       } catch (error: any) {
         console.error('Error fetching data:', error.message);
       }
@@ -46,6 +47,12 @@ function Podcast() {
     const formattedSeconds = String(seconds).padStart(2, '0');
 
     return `${formattedMinutes}:${formattedSeconds}`;
+  }
+
+  if(isLoading) {
+    return (
+      <div>Loading...</div>
+    )
   }
  
   return (

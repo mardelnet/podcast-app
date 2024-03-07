@@ -6,18 +6,26 @@ import styles from './Home.module.scss';
 
 function Home() {
   const [topPodcasts, setTopPodcasts] = useState<PodcastType[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetchTopPodcasts();
         setTopPodcasts(response);
+        setIsLoading(false);
       } catch (error: any) {
         console.error('Error fetching data:', error.message);
       }
     };
     fetchData();
   }, []);
+
+  if(isLoading) {
+    return (
+      <div>Loading...</div>
+    )
+  }
 
   return (
     <div className='main-container'>

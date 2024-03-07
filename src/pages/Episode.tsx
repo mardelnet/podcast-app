@@ -16,6 +16,7 @@ function Episode() {
 
   const [episode, setEpisode] = useState<SinglePodcastType | null>(null);
   const [podcast, setPodcast] = useState<SinglePodcastType | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +26,7 @@ function Episode() {
 
         setPodcast(response[0])
         setEpisode(currentEpisode)
+        setIsLoading(false);
       } catch (error: any) {
         console.error('Error fetching data:', error.message);
       }
@@ -32,7 +34,11 @@ function Episode() {
     fetchData();
   }, [episodeId, podcastId]);
 
-  console.log(episode)
+  if(isLoading) {
+    return (
+      <div>Loading...</div>
+    )
+  }
 
   return (
     <div className={styles['podcast-container']}>
