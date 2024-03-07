@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTopPodcasts } from '../utils/fetchData';
-import { Podcast } from '../types/types';
+import { PodcastType } from '../types/types';
 
 function Home() {
-  const [topPodcasts, setTopPodcasts] = useState<Podcast[] | null>(null);
+  const [topPodcasts, setTopPodcasts] = useState<PodcastType[] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {

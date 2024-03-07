@@ -30,13 +30,12 @@ export const fetchTopPodcasts = async () => {
 }
 
 
-export const fetchSinglePodcast = async () => {
+export const fetchSinglePodcast = async ( podcastId: string ) => {
   try {
-    const response = await fetchData('https://itunes.apple.com/lookup?id=934552872&media=podcast&entity=podcastEpisode&limit=20');
-
+    const response = await fetchData(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`);
     if (response.status.http_code === 200) {
       const json = await JSON.parse(response.contents);
-      return json.feed.results
+      return json.results
     } else {
       throw new Error('Failed to fetch data');
     }

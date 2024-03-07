@@ -1,4 +1,4 @@
-export interface Podcast {
+export interface PodcastType {
   artistName: string;
   artworkUrl100: string;
   contentAdvisoryRating: string;
@@ -7,4 +7,12 @@ export interface Podcast {
   kind: string;
   name: string;
   url: string;
+}
+
+export interface SinglePodcastType {
+  trackName: string;
+  releaseDate: string;
+  trackTimeMillis: number;
+  trackViewUrl: string;
+  trackId: number;
 }
