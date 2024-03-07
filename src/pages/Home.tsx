@@ -19,8 +19,6 @@ function Home() {
     fetchData();
   }, []);
 
-  console.log(topPodcasts);
-
   return (
     <div className='main-container'>
       {topPodcasts && (

@@ -4,12 +4,14 @@ import Home from './pages/Home';
 import Podcast from './pages/Podcast';
 import Episode from './pages/Episode';
 import NotFound from './pages/NotFound';
+import Header from './components/Header';
 
 // Define the App component
 function App() {
   return (
     <Router>
-      <div>
+      <div className='main-container'>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/podcast/:id" element={<Podcast />} />
