@@ -14,7 +14,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/podcast/:id" element={<Podcast />} />
+          <Route path="/podcast/:podcastId" element={<Podcast />} />
           <Route path="/podcast/:podcastId/episode/:episodeId" element={<Episode />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
