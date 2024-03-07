@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './styles/Episode.module.scss';
 import PodcastData from '../components/PodcastData';
-import { SinglePodcastType } from '../types/types';
+import { SinglePodcastType } from '../utils/types';
 import { fetchSinglePodcast } from '../utils/fetchData';
 import { useDispatch } from 'react-redux'
 import { isLoading } from '../utils/loadingSlice'
