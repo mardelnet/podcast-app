@@ -13,20 +13,55 @@ const fetchData = async (url: string) => {
   }
 }
 
-export const fetchTopPodcasts = async () => {
-  try {
-    const response = await fetchData('https://itunes.apple.com/us/rss/toppodcasts/limit=20/genre=1310/json');
+// Function to store data in localStorage with timestamp
+function storeData( itemName: string, data: any ) {
+  const now = new Date().getTime();
+  const dataToStore = {
+    timestamp: now,
+    data: data
+  };
+  localStorage.setItem(itemName, JSON.stringify(dataToStore));
+}
 
-    if (response.status.http_code === 200) {
-      const json = await JSON.parse(response.contents);
-      return json.feed.entry
-    } else {
-      throw new Error('Failed to fetch data');
-    }
-  } catch (error: any) { // Explicitly specify the type of 'error'
-    console.error('Error fetching data:', error.message);
+// Function to retrieve data from localStorage and check expiration
+function getLocalStorageData( itemName: string ) {
+  const storedData = localStorage.getItem( itemName );
+  if (!storedData) return null; // No data stored
+  const { timestamp, data } = JSON.parse(storedData);
+  const now = new Date().getTime();
+  // const expirationTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  const expirationTime = 10000; // 24 hours in milliseconds
+  if (now - timestamp > expirationTime) {
+    // Data expired, remove from storage
+    localStorage.removeItem( itemName );
+    return null;
+  } else {
+    // Data is still valid
+    return data;
   }
+}
+
+export const fetchTopPodcasts = async () => {
+  const cachedData = getLocalStorageData( 'topPodcasts' );
+
+  if (!cachedData) {
+    try {
+      const response = await fetchData('https://itunes.apple.com/us/rss/toppodcasts/limit=20/genre=1310/json');
   
+      if (response.status.http_code === 200) {
+        const json = await JSON.parse(response.contents);
+        storeData( 'topPodcasts', json.feed.entry )
+        return json.feed.entry
+      } else {
+        throw new Error('Failed to fetch data');
+      }
+    } catch (error: any) { // Explicitly specify the type of 'error'
+      console.error('Error fetching data:', error.message);
+    }
+  }
+
+  console.log('using cache data')
+  return cachedData;
 }
 
 
