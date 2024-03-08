@@ -58,6 +58,7 @@ function Podcast() {
       <div className={styles['podcast']}>
         {episodes && episodes[0] && (
           <PodcastData props={{
+            id: episodes[0].trackId,
             name: episodes[0].collectionName,
             image: episodes[0].artworkUrl100,
             author: episodes[0].artistName,

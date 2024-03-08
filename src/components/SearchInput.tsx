@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
+import styles from './styles/SearchInput.module.scss';
 
 interface Props {
   setSearchTerm: (term: string) => void;
@@ -14,12 +15,15 @@ function SearchInput({ setSearchTerm }: Props) {
   };
 
   return (
-    <input
-      type="text"
-      placeholder="Search podcasts..."
-      value={inputValue}
-      onChange={handleInputChange}
-    />
+    <div className={styles['search-container']}>
+      <input
+        className={styles['search-input']}
+        type="text"
+        placeholder="Search podcasts..."
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+    </div>
   );
 }
 
