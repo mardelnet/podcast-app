@@ -87,7 +87,8 @@ function Podcast(): JSX.Element {
           }} />
         )}
       </div>
-      <div className={styles['episodes']}>
+      {episodes && (
+        <div className={styles['episodes']}>
         <div className={styles['episodes__quantity']}>
           Episodes: {episodes?.length}
         </div>
@@ -120,6 +121,7 @@ function Podcast(): JSX.Element {
           </table>
         </div>
       </div>
+      )}
     </div>
   );
 }
