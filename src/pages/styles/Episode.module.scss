@@ -1,3 +1,5 @@
+@import '../../styles/vars';
+
 .podcast-container {
   display: flex;
   flex-direction: row;
@@ -25,12 +27,12 @@
   &__data {
     padding: 20px;
     box-sizing: border-box;
-    box-shadow: 0px 2px 5px #ccc;
+    box-shadow: 0px 2px 5px $color-light-grey;
     border-radius: 5px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: $size-mobile) {
   .podcast-container {
     flex-direction: column;
 

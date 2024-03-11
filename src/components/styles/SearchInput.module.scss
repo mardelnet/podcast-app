@@ -1,10 +1,16 @@
+@import '../../styles/vars';
+
 .search-container {
   text-align: right;
 }
 .search-input {
   padding: 10px;
-  border: 1px solid #999;
+  border: 1px solid $color-light-grey;
   border-radius: 5px;
   width: 100%;
-  max-width: 250px;
+  box-sizing: border-box;
+
+  @media (min-width: $size-mobile) {
+    max-width: 250px;
+  }
 }

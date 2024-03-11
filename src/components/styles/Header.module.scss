@@ -1,20 +1,23 @@
+@import '../../styles/vars';
+
 .header {
   margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $color-light-grey;
   padding-bottom: 15px;
   
   a {
     font-weight: bold;
     font-size: 20px;
     text-decoration: none;
+    color: inherit;
   }
 
   &__loader {
     width: 15px;
     height: 15px;
-    border: 2.5px solid #666;
+    border: 2.5px solid $color-grey;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
