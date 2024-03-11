@@ -38,18 +38,25 @@ function Podcast() {
     return formattedDate;
   }
 
-  const formatTime = ( milliseconds:number ) => {
+  const formatTime = (milliseconds: number) => {
     const totalSeconds = Math.floor(milliseconds / 1000);
 
-    // Calculate minutes and seconds
-    const minutes = Math.floor(totalSeconds / 60);
+    // Calculate hours, minutes, and seconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
-    // Format minutes and seconds
+    // Format hours, minutes, and seconds
+    const formattedHours = String(hours).padStart(2, '0');
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(seconds).padStart(2, '0');
 
-    return `${formattedMinutes}:${formattedSeconds}`;
+    // Construct the formatted time string
+    if (hours > 0) {
+        return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    } else {
+        return `${formattedMinutes}:${formattedSeconds}`;
+    }
   }
  
   return (
