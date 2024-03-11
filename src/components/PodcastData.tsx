@@ -11,13 +11,14 @@ interface PodcastProps {
 
 function PodcastData({ props }: { props: PodcastProps }) {
   return (
-    <Link className={styles['link']} to={`/podcast/${props.id}`}>
       <div className={styles['podcast-description']}>
-        <img src={props.image} alt={props.name} />
-        <div className={styles['podcast-description__name']}>
-          <h3>{props.name}</h3>
-          <p>by {props.author}</p>
-        </div>
+        <Link className={styles['link']} to={`/podcast/${props.id}`}>
+            <img src={props.image} alt={props.name} />
+            <div className={styles['podcast-description__name']}>
+            <h3>{props.name}</h3>
+            <p>by {props.author}</p>
+            </div>
+          </Link>
         {props.description && (
           <p>
             <strong>Description:</strong>
@@ -25,7 +26,6 @@ function PodcastData({ props }: { props: PodcastProps }) {
           </p>
         )}
       </div>
-    </Link>
   );
 }
 
