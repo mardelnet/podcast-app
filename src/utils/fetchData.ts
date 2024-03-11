@@ -66,7 +66,7 @@ export const fetchTopPodcasts = async () => {
 
 
 export const fetchSinglePodcast = async ( podcastId: string ) => {
-  const cachedData = getLocalStorageData( podcastId );
+  const cachedData = getLocalStorageData( `podcast_${podcastId}` );
 
   if (!cachedData) {
     try {
@@ -74,7 +74,7 @@ export const fetchSinglePodcast = async ( podcastId: string ) => {
   
       if (response.status.http_code === 200) {
         const json = await JSON.parse(response.contents);
-        storeData( podcastId, json.results )
+        storeData( `podcast_${podcastId}`, json.results )
         return json.results
       } else {
         throw new Error('Failed to fetch data');
