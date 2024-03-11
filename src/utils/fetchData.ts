@@ -52,10 +52,10 @@ export const fetchTopPodcasts = async () => {
         storeData( 'topPodcasts', json.feed.entry )
         return json.feed.entry
       } else {
-        throw new Error('Failed to fetch data');
+        throw new Error('Failed to fetch top podcasts data');
       }
     } catch (error: any) { // Explicitly specify the type of 'error'
-      console.error('Error fetching data:', error.message);
+      console.error('Error fetching top podcasts data:', error.message);
     }
   }
   return cachedData;
@@ -73,10 +73,10 @@ export const fetchSinglePodcast = async ( podcastId: string ) => {
         storeData( `podcast_${podcastId}`, json.results )
         return json.results
       } else {
-        throw new Error('Failed to fetch data');
+        throw new Error('Failed to fetch podcast data');
       }
     } catch (error: any) { // Explicitly specify the type of 'error'
-      console.error('Error fetching data:', error.message);
+      console.error('Error fetching podcast data:', error.message);
     }
   }
   return cachedData;

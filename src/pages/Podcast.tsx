@@ -26,7 +26,7 @@ function Podcast() {
         setPodcast(response);
         dispatch(isLoading(false));
       } catch (error: any) {
-        console.error('Error fetching data:', error.message);
+        console.error('Error fetching podcast data:', error.message);
       }
     };
     fetchData();

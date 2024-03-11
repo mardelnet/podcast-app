@@ -20,7 +20,7 @@ function Home() {
         setTopPodcasts(response);
         dispatch(isLoading(false));
       } catch (error: any) {
-        console.error('Error fetching data:', error.message);
+        console.error('Error fetching top 100 podcasts data:', error.message);
       }
     };
     fetchData();

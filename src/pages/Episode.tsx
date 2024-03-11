@@ -31,7 +31,7 @@ function Episode() {
         setEpisode(currentEpisode)
         dispatch(isLoading(false));
       } catch (error: any) {
-        console.error('Error fetching data:', error.message);
+        console.error('Error fetching episode data:', error.message);
       }
     };
     fetchData();
