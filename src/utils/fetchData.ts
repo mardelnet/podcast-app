@@ -66,16 +66,24 @@ export const fetchTopPodcasts = async () => {
 
 
 export const fetchSinglePodcast = async ( podcastId: string ) => {
-  try {
-    const response = await fetchData(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`);
-    if (response.status.http_code === 200) {
-      const json = await JSON.parse(response.contents);
-      return json.results
-    } else {
-      throw new Error('Failed to fetch data');
-    }
-  } catch (error: any) { // Explicitly specify the type of 'error'
-    console.error('Error fetching data:', error.message);
-  }
+  const cachedData = getLocalStorageData( podcastId );
+
+  if (!cachedData) {
+    try {
+      const response = await fetchData(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`);
   
+      if (response.status.http_code === 200) {
+        const json = await JSON.parse(response.contents);
+        storeData( podcastId, json.results )
+        return json.results
+      } else {
+        throw new Error('Failed to fetch data');
+      }
+    } catch (error: any) { // Explicitly specify the type of 'error'
+      console.error('Error fetching data:', error.message);
+    }
+  }
+
+  console.log('using cache data' , podcastId)
+  return cachedData;
 }
