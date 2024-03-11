@@ -75,7 +75,7 @@ function Podcast(): JSX.Element {
   }
  
   return (
-    <div className={styles['podcast-container']}>
+    <div className={styles['podcast-container']} data-testid="podcast">
       <div className={styles['podcast']}>
         {episodes && episodes[0] && (
           <PodcastData props={{

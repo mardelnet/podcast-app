@@ -1,60 +1,60 @@
-// import React from 'react';
-// import { render, screen } from '@testing-library/react';
-// import App from './App';
-// import Home from './pages/Home';
-// import Podcast from './pages/Podcast';
-// import Episode from './pages/Episode';
-// import NotFound from './pages/NotFound';
-// import Header from './components/Header';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './utils/store';
+import App from './App';
 
-// jest.mock('./pages/Home', () => ({
-//   __esModule: true,
-//   default: jest.fn(() => <div data-testid="home-component">Home component</div>),
-// }));
+describe('App Component', () => {
+  test('renders Header component', () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
 
-// jest.mock('./pages/Podcast', () => ({
-//   __esModule: true,
-//   default: jest.fn(() => <div data-testid="podcast-component">Podcast component</div>),
-// }));
+    const headerElement = screen.getByTestId('header');
+    expect(headerElement).toBeInTheDocument();
+  });
 
-// jest.mock('./pages/Episode', () => ({
-//   __esModule: true,
-//   default: jest.fn(() => <div data-testid="episode-component">Episode component</div>),
-// }));
+  test('renders Podcast component for /podcast/:podcastId path', () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/podcast/123']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
 
-// jest.mock('./pages/NotFound', () => ({
-//   __esModule: true,
-//   default: jest.fn(() => <div data-testid="not-found-component">NotFound component</div>),
-// }));
+    const podcastElement = screen.getByTestId('podcast');
+    expect(podcastElement).toBeInTheDocument();
+  });
 
-// describe('App component', () => {
-//   it('renders header', () => {
-//     render(<Header />);
-//     const headerElement = screen.getByRole('banner');
-//     expect(headerElement).toBeInTheDocument();
-//   });
+  test('renders Episode component for /podcast/:podcastId/episode/:episodeId path', () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/podcast/123/episode/456']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
 
-//   it('renders Home component', () => {
-//     render(<Home />);
-//     const homeElement = screen.getByTestId('home-component');
-//     expect(homeElement).toBeInTheDocument();
-//   });
+    const episodeElement = screen.getByTestId('episode');
+    expect(episodeElement).toBeInTheDocument();
+  });
 
-//   it('renders Podcast component', () => {
-//     render(<Podcast />);
-//     const podcastElement = screen.getByTestId('podcast-component');
-//     expect(podcastElement).toBeInTheDocument();
-//   });
+  test('renders NotFound component for any other path', () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/random-path']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
 
-//   it('renders Episode component', () => {
-//     render(<Episode />);
-//     const episodeElement = screen.getByTestId('episode-component');
-//     expect(episodeElement).toBeInTheDocument();
-//   });
-
-//   it('renders NotFound component', () => {
-//     render(<NotFound />);
-//     const notFoundElement = screen.getByTestId('not-found-component');
-//     expect(notFoundElement).toBeInTheDocument();
-//   });
-// });
+    const notFoundElement = screen.getByTestId('not-found-component');
+    expect(notFoundElement).toBeInTheDocument();
+  });
+});

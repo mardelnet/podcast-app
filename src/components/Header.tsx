@@ -12,7 +12,7 @@ function Header(): JSX.Element {
   const loadingData = useSelector((state: RootState) => state.loading.loading);
   
   return (
-    <div className={styles['header']}>
+    <div className={styles['header']} data-testid="header">
       {/* Link to home */}
       <Link to={`/`}>Podcaster</Link>
       {/* Render loader if data is loading */}

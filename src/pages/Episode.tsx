@@ -43,7 +43,7 @@ function Episode(): JSX.Element {
   }, [dispatch, episodeId, podcastId]);
 
   return (
-    <div className={styles['podcast-container']}>
+    <div className={styles['podcast-container']} data-testid="episode">
       <div className={styles['podcast']}>
         {podcast && (
           <PodcastData props={{
