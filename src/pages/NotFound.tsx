@@ -7,7 +7,7 @@ import React from 'react';
  */
 function NotFound(): JSX.Element {
   return (
-    <div>
+    <div data-testid="not-found-component">
       <p>NotFound</p>
     </div>
   );

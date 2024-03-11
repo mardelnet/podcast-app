@@ -3,7 +3,7 @@
  * @param itemName - The name/key under which the data will be stored in localStorage.
  * @param data - The data to be stored.
  */
-function storeData(itemName: string, data: any): void {
+export function storeData(itemName: string, data: any): void {
   const now = new Date().getTime();
   const dataToStore = {
     timestamp: now,
@@ -17,7 +17,7 @@ function storeData(itemName: string, data: any): void {
  * @param itemName - The name/key of the item to retrieve from localStorage.
  * @returns The stored data if it's still valid, otherwise returns null.
  */
-function getLocalStorageData(itemName: string): any | null {
+export function getLocalStorageData(itemName: string): any | null {
   const storedData = localStorage.getItem(itemName);
   if (!storedData) return null; // No data stored
   const { timestamp, data } = JSON.parse(storedData);
