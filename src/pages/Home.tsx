@@ -26,6 +26,11 @@ function Home() {
     fetchData();
   }, [dispatch]);
 
+  /**
+   * Filters the top podcasts based on the search term.
+   * It filters podcasts whose name or artist label includes the search term (case-insensitive).
+   * @type {PodcastType[] | undefined} The array of filtered podcasts, or undefined if topPodcasts is not available.
+   */
   const filteredPodcasts = topPodcasts?.filter(podcast =>
     podcast['im:name'].label.toLowerCase().includes(searchTerm.toLowerCase()) ||
     podcast['im:artist'].label.toLowerCase().includes(searchTerm.toLowerCase())

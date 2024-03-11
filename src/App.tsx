@@ -6,17 +6,23 @@ import Episode from './pages/Episode';
 import NotFound from './pages/NotFound';
 import Header from './components/Header';
 
-// Define the App component
-function App() {
+/**
+ * Main component representing the entire application.
+ * Uses React Router to define routes and render corresponding components.
+ * @returns JSX.Element representing the App component.
+ */
+function App(): JSX.Element {
   return (
     <Router>
       <div className='main-container'>
+        {/* Render the Header component */}
         <Header />
+        {/* Define routes using React Router */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/podcast/:podcastId" element={<Podcast />} />
-          <Route path="/podcast/:podcastId/episode/:episodeId" element={<Episode />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Home />} /> {/* Render Home component for root path */}
+          <Route path="/podcast/:podcastId" element={<Podcast />} /> {/* Render Podcast component */}
+          <Route path="/podcast/:podcastId/episode/:episodeId" element={<Episode />} /> {/* Render Episode component */}
+          <Route path="*" element={<NotFound />} /> {/* Render NotFound component for any other path */}
         </Routes>
       </div>
     </Router>

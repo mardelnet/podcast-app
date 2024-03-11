@@ -4,8 +4,8 @@ import styles from './styles/Episode.module.scss';
 import PodcastData from '../components/PodcastData';
 import { SinglePodcastType } from '../utils/types';
 import { fetchSinglePodcast } from '../utils/fetchData';
-import { useDispatch } from 'react-redux'
-import { isLoading } from '../utils/loadingSlice'
+import { useDispatch } from 'react-redux';
+import { isLoading } from '../utils/loadingSlice';
 
 // Extend EpisodeParams from Record<string, string | undefined>
 interface EpisodeParams extends Record<string, string | undefined> {
@@ -13,9 +13,14 @@ interface EpisodeParams extends Record<string, string | undefined> {
   episodeId: string;
 }
 
-function Episode() {
+/**
+ * Functional component representing a podcast episode page.
+ * Fetches data for the selected episode and displays it.
+ * @returns JSX.Element representing the Episode component.
+ */
+function Episode(): JSX.Element {
   const { podcastId, episodeId } = useParams<EpisodeParams>();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   
   const [episode, setEpisode] = useState<SinglePodcastType | null>(null);
   const [podcast, setPodcast] = useState<SinglePodcastType | null>(null);
@@ -27,8 +32,8 @@ function Episode() {
         const response = await fetchSinglePodcast(podcastId as string);
         const currentEpisode = response.find((episode: { trackId: number; }) => episode.trackId === Number(episodeId));
 
-        setPodcast(response[0])
-        setEpisode(currentEpisode)
+        setPodcast(response[0]);
+        setEpisode(currentEpisode);
         dispatch(isLoading(false));
       } catch (error: any) {
         console.error('Error fetching episode data:', error.message);
@@ -38,8 +43,7 @@ function Episode() {
   }, [dispatch, episodeId, podcastId]);
 
   return (
-    podcast && episode && (
-      <div className={styles['podcast-container']}>
+    <div className={styles['podcast-container']}>
       <div className={styles['podcast']}>
         {podcast && (
           <PodcastData props={{
@@ -62,7 +66,6 @@ function Episode() {
         </div>
       </div>
     </div>
-    )
   );
 }
 

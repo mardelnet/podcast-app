@@ -1,7 +1,13 @@
+/**
+ * Interface representing the image of a podcast.
+ */
 interface PodcastImage {
   label: string;
 }
 
+/**
+ * Interface representing a single podcast item.
+ */
 export interface PodcastType {
   'im:artist': { label: string };
   'im:image': PodcastImage[];
@@ -14,6 +20,9 @@ export interface PodcastType {
   summary: { label: string };
 }
 
+/**
+ * Interface representing a single podcast episode.
+ */
 export interface SinglePodcastType {
   trackName: string;
   releaseDate: string;
