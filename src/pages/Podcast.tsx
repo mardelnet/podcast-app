@@ -88,18 +88,20 @@ function Podcast() {
             </thead>
             <tbody>
             {episodes && episodes.map((item: SinglePodcastType, index) => (
-                <tr key={item.trackId} style={{ backgroundColor: index % 2 === 0 ? '#f6f6f6' : '#ffffff' }}>
-                  <td>
-                    <Link 
-                      state={{episodeUrl: item.episodeUrl}} 
-                      to={`/podcast/${podcastId}/episode/${item.trackId}`}>
-                        {item.trackName}
-                    </Link>
-                  </td>
-                  <td>{formatDate(item.releaseDate)}</td>
-                  <td>{formatTime(item.trackTimeMillis)}</td>
-                </tr>
-              ))}
+              // Skip the first element since it is not an episode of the podcast.
+              index > 0 &&
+              <tr key={item.trackId} style={{ backgroundColor: index % 2 === 0 ? '#f6f6f6' : '#ffffff' }}>
+                <td>
+                  <Link 
+                    state={{episodeUrl: item.episodeUrl}} 
+                    to={`/podcast/${podcastId}/episode/${item.trackId}`}>
+                      {item.trackName}
+                  </Link>
+                </td>
+                <td>{formatDate(item.releaseDate)}</td>
+                <td>{formatTime(item.trackTimeMillis)}</td>
+              </tr>
+            ))}
             </tbody>
           </table>
         </div>
