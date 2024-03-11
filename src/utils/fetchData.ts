@@ -1,18 +1,3 @@
-const fetchData = async (url: string) => {
-  try {
-    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-    
-    if (response.ok) {
-      const json = await response.json();
-      return json;
-    } else {
-      throw new Error('Failed to fetch data');
-    }
-  } catch (error: any) { // Explicitly specify the type of 'error'
-    console.error('Error fetching data:', error.message);
-  }
-}
-
 // Function to store data in localStorage with timestamp
 function storeData( itemName: string, data: any ) {
   const now = new Date().getTime();
@@ -29,8 +14,7 @@ function getLocalStorageData( itemName: string ) {
   if (!storedData) return null; // No data stored
   const { timestamp, data } = JSON.parse(storedData);
   const now = new Date().getTime();
-  // const expirationTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-  const expirationTime = 10000; // 24 hours in milliseconds
+  const expirationTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
   if (now - timestamp > expirationTime) {
     // Data expired, remove from storage
     localStorage.removeItem( itemName );
@@ -38,6 +22,21 @@ function getLocalStorageData( itemName: string ) {
   } else {
     // Data is still valid
     return data;
+  }
+}
+
+const fetchData = async (url: string) => {
+  try {
+    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+    
+    if (response.ok) {
+      const json = await response.json();
+      return json;
+    } else {
+      throw new Error('Failed to fetch data');
+    }
+  } catch (error: any) { // Explicitly specify the type of 'error'
+    console.error('Error fetching data:', error.message);
   }
 }
 
@@ -59,11 +58,8 @@ export const fetchTopPodcasts = async () => {
       console.error('Error fetching data:', error.message);
     }
   }
-
-  console.log('using cache data')
   return cachedData;
 }
-
 
 export const fetchSinglePodcast = async ( podcastId: string ) => {
   const cachedData = getLocalStorageData( `podcast_${podcastId}` );
@@ -83,7 +79,5 @@ export const fetchSinglePodcast = async ( podcastId: string ) => {
       console.error('Error fetching data:', error.message);
     }
   }
-
-  console.log('using cache data' , podcastId)
   return cachedData;
 }
