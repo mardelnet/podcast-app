@@ -1,10 +1,10 @@
 import styles from './styles/Header.module.scss';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { RootState } from '../utils/store';
 
 function Header() {
-  // @ts-ignore
-  const loadingData = useSelector(state => state.loading.loading)
+  const loadingData = useSelector((state: RootState) => state.loading.loading);
   
   return (
     <div className={styles['header']}>
