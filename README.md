@@ -30,7 +30,3 @@ This script runs all the tests included in the project. Refer to the [running te
 Builds the application for production to the `build` folder.  
 It optimizes the build for better performance and prepares the application for deployment.  
 The build is minified, and the filenames include unique hashes to ensure cache busting.
-
-## Learn More
-
-You can learn more about React by referring to the [Create React App documentation](https://reactjs.org/docs/create-a-new-react-app.html).
